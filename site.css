@@ -209,27 +209,16 @@ section {
   color: var(--muted);
 }
 
-.tag {
-  font: 600 11px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: 4px 7px;
-  border: 1px solid var(--hairline);
-  border-radius: 999px;
-}
-
-.tag.pro {
-  color: var(--accent);
-  border-color: currentColor;
-}
-
 /* Pricing */
 
 .plans {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
+}
+
+.plans.single {
+  grid-template-columns: minmax(0, 560px);
 }
 
 .plan {
