@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex">
+  <title>Switch on Full Copy Pro</title>
+  <meta name="description" content="Switches Full Copy Pro on in Chrome after you subscribe.">
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="wrap bar">
+    <a class="brand" href="./"><img src="icon.png" alt="" width="30" height="30">Full Copy</a>
+    <nav class="nav" aria-label="Main">
+      <a href="./#pricing">Pricing</a>
+      <a href="https://andanic.github.io/full-copy-privacy/support.html">Help</a>
+    </nav>
+  </header>
+
+  <!-- Lemon Squeezy's "Switch on Full Copy Pro" button opens this page as activate.html?key=…
+       Full Copy reads the key here, switches Pro on, and reports back in data-full-copy on <html>. -->
+  <main class="wrap activate" aria-live="polite">
+    <section data-state="nokey">
+      <h1>Switch on Full Copy Pro</h1>
+      <p>After you subscribe, the <b>Switch on Full Copy Pro</b> button on the thank-you screen and in your receipt
+        email brings you here, and Pro switches on by itself.</p>
+      <p><a class="button" href="./#pricing">See pricing</a></p>
+    </section>
+
+    <section data-state="working" hidden>
+      <h1>Switching on Full Copy Pro…</h1>
+      <p>This takes a second.</p>
+    </section>
+
+    <section data-state="on" hidden>
+      <h1>Full Copy Pro is on</h1>
+      <p>Thank you for subscribing. You can close this tab and copy as usual: the pictures come with the text.</p>
+      <p class="aside">Using Full Copy on another computer too? Open your receipt email there and click
+        <b>Switch on Full Copy Pro</b>. One subscription works on up to 3 computers.</p>
+    </section>
+
+    <section data-state="already" hidden>
+      <h1>Full Copy Pro is already on</h1>
+      <p>Pro is switched on in this browser. You can close this tab.</p>
+    </section>
+
+    <section data-state="limit" hidden>
+      <h1>Your subscription is on 3 computers already</h1>
+      <p>To move it here, click the Full Copy icon in Chrome on a computer you no longer use, open the Pro page and
+        choose <b>Remove from this browser</b>. Then click the button in your receipt email again.</p>
+      <p class="aside">Lost that computer? Email <a href="mailto:mukwevhoandani1020@gmail.com">mukwevhoandani1020@gmail.com</a>
+        and we’ll free its place.</p>
+    </section>
+
+    <section data-state="ended" hidden>
+      <h1>This subscription has ended</h1>
+      <p>To carry on, click the Full Copy icon in Chrome and choose Get Pro. If you think this is a mistake, email
+        <a href="mailto:mukwevhoandani1020@gmail.com">mukwevhoandani1020@gmail.com</a>.</p>
+    </section>
+
+    <section data-state="unreachable" hidden>
+      <h1>Couldn’t reach Lemon Squeezy</h1>
+      <p>Check your internet connection, then reload this page to try again.</p>
+    </section>
+
+    <section data-state="unknown" hidden>
+      <h1>That didn’t work</h1>
+      <p>Full Copy couldn’t switch Pro on with this link. Email
+        <a href="mailto:mukwevhoandani1020@gmail.com">mukwevhoandani1020@gmail.com</a> with the order number from your
+        receipt and we’ll sort it out.</p>
+    </section>
+
+    <section data-state="missing" hidden>
+      <h1>Full Copy isn’t in this browser</h1>
+      <p>Your payment went through. Pro switches on in the browser where Full Copy is installed.</p>
+      <ul>
+        <li>Use Full Copy in Chrome on another computer? Open your receipt email there and click
+          <b>Switch on Full Copy Pro</b>.</li>
+        <li>Haven’t added it yet? Add Full Copy to Chrome and keep this tab open: it finishes by itself.</li>
+      </ul>
+      <p><a class="button" href="https://chromewebstore.google.com/detail/jnndmofabhahemmmoddoddihhackbjdg">Add to Chrome</a></p>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <nav aria-label="Legal">
+      <a href="terms.html">Terms</a>
+      <a href="refunds.html">Refunds</a>
+      <a href="https://andanic.github.io/full-copy-privacy/">Privacy</a>
+      <a href="https://andanic.github.io/full-copy-privacy/support.html">Help</a>
+      <a href="mailto:mukwevhoandani1020@gmail.com">Contact</a>
+    </nav>
+    <p>© 2026 Full Copy</p>
+  </footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const sections = document.querySelectorAll('[data-state]');
+      const show = (name) => {
+        const known = document.querySelector(`[data-state="${name}"]`) ? name : 'unknown';
+        for (const section of sections) section.hidden = section.dataset.state !== known;
+      };
+      const update = () => root.dataset.fullCopy && show(root.dataset.fullCopy);
+      if (!new URLSearchParams(location.search).has('key')) return show('nokey');
+      show('working');
+      update();
+      new MutationObserver(update).observe(root, { attributes: true, attributeFilter: ['data-full-copy'] });
+      // No answer from Full Copy: it isn't installed here. If it's added now, it still picks the key up.
+      setTimeout(() => root.dataset.fullCopy || show('missing'), 4000);
+    })();
+  </script>
+</body>
+</html>

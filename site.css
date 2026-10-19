@@ -362,3 +362,42 @@ section {
     padding-top: 64px;
   }
 }
+
+/* Switching Pro on after checkout */
+
+.activate {
+  max-width: 640px;
+  min-height: 46vh;
+  padding-top: 72px;
+}
+
+.activate h1 {
+  margin: 0 0 12px;
+  font-size: clamp(30px, 5vw, 40px);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.activate p,
+.activate li {
+  color: var(--muted);
+}
+
+.activate ul {
+  padding-left: 20px;
+}
+
+.activate li + li {
+  margin-top: 6px;
+}
+
+.activate .aside {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+  font-size: 15px;
+}
+
+.activate .button {
+  margin-top: 8px;
+}
